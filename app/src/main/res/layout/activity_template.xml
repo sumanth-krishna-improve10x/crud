@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".messages.MessageActivity">
+    tools:context="templates.TemplateActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/message_rcv"
+        android:id="@+id/template_rcv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
@@ -19,4 +19,5 @@
         android:layout_height="wrap_content"
         android:text="Add"
         android:textAllCaps="false" />
+
 </LinearLayout>

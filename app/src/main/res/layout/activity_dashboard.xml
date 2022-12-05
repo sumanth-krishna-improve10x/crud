@@ -31,6 +31,21 @@
                 android:text="Message"
                 android:textColor="#000000"
                 android:textSize="16sp" />
+
+            <ImageButton
+                android:id="@+id/template_imgbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Templates"
+                android:textColor="#000000" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
