@@ -11,12 +11,12 @@ import retrofit2.http.Path;
 
 public interface SeriesItemsService {
     @GET("sumanthSeries")
-    Call<List<SeriesItem>> fetchData();
+    Call<List<SeriesItem>> fetchSeriesItems();
 
     @POST("sumanthSeries")
-    Call<SeriesItem> create(@Body SeriesItem series);
+    Call<SeriesItem> createSeriesItem(@Body SeriesItem series);
 
     @DELETE("sumanthSeries{/id}")
-    Call<Void> deleteMessage (@Path("id")String id);
+    Call<Void> deleteSeriesItem(@Path("id")String id);
 
 }

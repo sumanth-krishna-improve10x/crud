@@ -32,19 +32,19 @@ public class AddSeriesItemActivity extends AppCompatActivity {
                 String name = seriesName.getText().toString();
                 EditText seriesImgUrl = findViewById(R.id.series_imgurl);
                 String imgUrl = seriesImgUrl.getText().toString();
-                createSeries(id, name, imgUrl);
+                createSeriesItem(id, name, imgUrl);
             });
     }
 
-    private void createSeries(String id, String name, String imgUrl) {
+    private void createSeriesItem(String id, String name, String imgUrl) {
         SeriesItem series = new SeriesItem();
         series.id = id;
         series.title = name;
         series.imageUrl = imgUrl;
 
         SeriesItemsApi api = new SeriesItemsApi();
-        SeriesItemsService seriesService = api.createSeriesService();
-        Call<SeriesItem> call = seriesService.create(series);
+        SeriesItemsService seriesService = api.createSeriesItemService();
+        Call<SeriesItem> call = seriesService.createSeriesItem(series);
         call.enqueue(new Callback<SeriesItem>() {
             @Override
             public void onResponse(Call<SeriesItem> call, Response<SeriesItem> response) {
@@ -57,6 +57,5 @@ public class AddSeriesItemActivity extends AppCompatActivity {
                 Toast.makeText(AddSeriesItemActivity.this, "Failed to get loaded", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }

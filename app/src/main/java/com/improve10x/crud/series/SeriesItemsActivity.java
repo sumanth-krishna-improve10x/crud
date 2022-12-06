@@ -40,10 +40,10 @@ public class SeriesItemsActivity extends AppCompatActivity {
         fetchSeriesItems();
     }
 
-    public void deleteMessage(SeriesItem series){
+    public void deleteSeriesItem(SeriesItem series){
         SeriesItemsApi seriesApi = new SeriesItemsApi();
-        SeriesItemsService seriesService = seriesApi.createSeriesService();
-        Call<Void> call = seriesService.deleteMessage(series.id);
+        SeriesItemsService seriesService = seriesApi.createSeriesItemService();
+        Call<Void> call = seriesService.deleteSeriesItem(series.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -69,8 +69,8 @@ public class SeriesItemsActivity extends AppCompatActivity {
 
     public void fetchSeriesItems(){
         SeriesItemsApi seriesItemsApi = new SeriesItemsApi();
-        SeriesItemsService seriesService = seriesItemsApi.createSeriesService();
-        Call<List<SeriesItem>> call = seriesService.fetchData();
+        SeriesItemsService seriesService = seriesItemsApi.createSeriesItemService();
+        Call<List<SeriesItem>> call = seriesService.fetchSeriesItems();
         call.enqueue(new Callback<List<SeriesItem>>() {
             @Override
             public void onResponse(Call<List<SeriesItem>> call, Response<List<SeriesItem>> response) {
@@ -100,7 +100,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
             @Override
             public void onItemDelete(SeriesItem series) {
                 Toast.makeText(SeriesItemsActivity.this, "onItemDelete", Toast.LENGTH_SHORT).show();
-                deleteMessage(series);
+                deleteSeriesItem(series);
 
             }
 
