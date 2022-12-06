@@ -6,5 +6,5 @@ public class Template {
     @SerializedName("_id")
     public String id;
     @SerializedName("messageText")
-    public String message;
+    public String messageText;
 }

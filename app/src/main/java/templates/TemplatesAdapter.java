@@ -11,7 +11,7 @@ import com.improve10x.crud.R;
 
 import java.util.List;
 
-public class TemplateAdapter extends RecyclerView.Adapter<TemplateViewHolder> {
+public class TemplatesAdapter extends RecyclerView.Adapter<TemplateViewHolder> {
 
     OnItemActionListener onItemActionListener;
 
@@ -39,7 +39,7 @@ public class TemplateAdapter extends RecyclerView.Adapter<TemplateViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull TemplateViewHolder holder, int position) {
         Template template = templatesList.get(position);
-        holder.templateMgsTxt.setText(template.message);
+        holder.templateMgsTxt.setText(template.messageText);
         holder.deleteBtn.setOnClickListener(view -> {
             onItemActionListener.onItemDelete(template);
         });

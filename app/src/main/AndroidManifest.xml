@@ -34,7 +34,7 @@
             android:name="templates.AddTemplateActivity"
             android:exported="false" />
         <activity
-            android:name="templates.TemplateActivity"
+            android:name="templates.TemplatesActivity"
             android:exported="false" />
         <activity
             android:name=".messages.AddMessagesActivity$AddMessageActivity"

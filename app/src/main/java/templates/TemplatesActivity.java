@@ -18,43 +18,40 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TemplateActivity extends AppCompatActivity {
+public class TemplatesActivity extends AppCompatActivity {
     public ArrayList<Template> templates;
-    public RecyclerView templateRcv;
-    public TemplateAdapter templateAdapter;
+    public RecyclerView templatesRv;
+    public TemplatesAdapter templatesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template);
         getSupportActionBar().setTitle("Template");
-        handleAddBtn();
-        setTemplate();
-        setRecyclerview();
+        handleAdd();
+        setupData();
+        setupTemplateRv();
     }
 
     public void deleteMessage(Template template) {
-        TemplateApi templateApi = new TemplateApi();
-        TemplateService templateService = templateApi.createTemplateService();
+        TemplatesApi templateApi = new TemplatesApi();
+        TemplatesService templateService = templateApi.createTemplateService();
         Call<Void> call = templateService.deleteMessage(template.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(TemplateActivity.this, "Successfully done", Toast.LENGTH_SHORT).show();
-                fetchData();
+                Toast.makeText(TemplatesActivity.this, "Successfully done", Toast.LENGTH_SHORT).show();
+                fetchTemplates();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(TemplateActivity.this, "Failed to delete", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(TemplatesActivity.this, "Failed to delete", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
-
-    private void handleAddBtn() {
+    private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent addTemplateIntent = new Intent(this,AddTemplateActivity.class);
@@ -62,61 +59,55 @@ public class TemplateActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        fetchData();
+        fetchTemplates();
     }
 
-    public void fetchData(){
-        TemplateApi templateApi = new TemplateApi();
-        TemplateService templateService = templateApi.createTemplateService();
+    public void fetchTemplates(){
+        TemplatesApi templateApi = new TemplatesApi();
+        TemplatesService templateService = templateApi.createTemplateService();
         Call<List<Template>> call = templateService.fetchData();
         call.enqueue(new Callback<List<Template>>() {
             @Override
             public void onResponse(Call<List<Template>> call, Response<List<Template>> response) {
                 List<Template> templates = response.body();
-                templateAdapter.setTemplates(templates);
-
+                templatesAdapter.setTemplates(templates);
             }
 
             @Override
             public void onFailure(Call<List<Template>> call, Throwable t) {
-                Toast.makeText(TemplateActivity.this, "Failed to get loaded", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(TemplatesActivity.this, "Failed to get loaded", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-
-    public void setRecyclerview() {
-        templateRcv = findViewById(R.id.template_rcv);
-        templateRcv.setLayoutManager(new LinearLayoutManager(this));
-        templateAdapter = new TemplateAdapter();
-        templateAdapter.setTemplates(templates);
-        templateRcv.setAdapter(templateAdapter);
-        templateAdapter.setOnItemClickListener(new OnItemActionListener() {
+    public void setupTemplateRv() {
+        templatesRv = findViewById(R.id.template_rcv);
+        templatesRv.setLayoutManager(new LinearLayoutManager(this));
+        templatesAdapter = new TemplatesAdapter();
+        templatesAdapter.setTemplates(templates);
+        templatesRv.setAdapter(templatesAdapter);
+        templatesAdapter.setOnItemClickListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Template template) {
-                Toast.makeText(TemplateActivity.this, "on Clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TemplatesActivity.this, "on Clicked", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onItemDelete(Template template) {
-                Toast.makeText(TemplateActivity.this, "on Delete", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TemplatesActivity.this, "on Delete", Toast.LENGTH_SHORT).show();
                 deleteMessage(template);
-
             }
 
             @Override
             public void onItemEdit(Template template) {
-                Toast.makeText(TemplateActivity.this, "on Edit", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(TemplatesActivity.this, "on Edit", Toast.LENGTH_SHORT).show();
             }
         });
     }
-    private void setTemplate() {
+    private void setupData() {
         templates  = new ArrayList<>();
     }
 

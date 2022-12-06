@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 import com.improve10x.crud.R;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,10 +35,10 @@ public class AddTemplateActivity extends AppCompatActivity {
 
     private void createTemplate(String message) {
         Template template = new Template();
-        template.message = message;
+        template.messageText = message;
 
-        TemplateApi templateApi = new TemplateApi();
-        TemplateService templateService = templateApi.createTemplateService();
+        TemplatesApi templateApi = new TemplatesApi();
+        TemplatesService templateService = templateApi.createTemplateService();
         Call<Template> call = templateService.create(template);
         call.enqueue(new Callback<Template>() {
             @Override

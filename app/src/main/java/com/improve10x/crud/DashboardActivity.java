@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 import com.improve10x.crud.messages.MessagesActivity;
 import com.improve10x.crud.series.SeriesListActivity;
 
-import templates.TemplateActivity;
+import templates.TemplatesActivity;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -27,7 +27,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         ImageButton templateImgBtn = findViewById(R.id.template_imgbtn);
         templateImgBtn.setOnClickListener(view -> {
-            Intent templateIntent = new Intent(this, TemplateActivity.class);
+            Intent templateIntent = new Intent(this, TemplatesActivity.class);
             startActivity(templateIntent);
         });
 
