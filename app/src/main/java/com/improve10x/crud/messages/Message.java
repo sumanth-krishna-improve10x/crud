@@ -12,5 +12,5 @@ public class Message {
     @SerializedName("phoneNumber")
     public String phoneNumber;
     @SerializedName("messageText")
-    public String message;
+    public String messagesText;
 }

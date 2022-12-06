@@ -16,22 +16,37 @@
         android:theme="@style/Theme.Crud"
         tools:targetApi="31">
         <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+        <activity
+            android:name=".series.AddSeriesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".series.SeriesListActivity"
+            android:exported="false" />
+        <activity
             android:name="templates.AddTemplateActivity"
             android:exported="false" />
         <activity
             android:name="templates.TemplateActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity$AddMessageActivity"
+            android:name=".messages.AddMessagesActivity$AddMessageActivity"
             android:exported="false" />
         <activity
-            android:name=".messages.MessageActivity"
+            android:name=".messages.MessagesActivity"
             android:exported="false" />
         <activity
             android:name=".DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".messages.AddMessagesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

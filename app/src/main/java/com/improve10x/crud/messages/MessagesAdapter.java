@@ -11,7 +11,7 @@ import com.improve10x.crud.R;
 
 import java.util.List;
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
+public class MessagesAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
     public com.improve10x.crud.messages.onItemActionListener onItemActionListener;
 
@@ -21,7 +21,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
     List<Message> messagesList;
 
-    public void setData (List<Message> messageArrayList){
+    public void setUpData (List<Message> messageArrayList){
         messagesList = messageArrayList;
         notifyDataSetChanged();
 
@@ -40,7 +40,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         Message message = messagesList.get(position);
         holder.nameTxt.setText(message.name);
         holder.phoneNumberTxt.setText(message.phoneNumber);
-        holder.messageTxt.setText(message.message);
+        holder.messageTxt.setText(message.messagesText);
         holder.deleteBtn.setOnClickListener(view -> {
             onItemActionListener.onItemDelete(message);
         });
