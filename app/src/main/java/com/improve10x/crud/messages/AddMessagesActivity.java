@@ -22,10 +22,10 @@ public class AddMessagesActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_add_message);
             getSupportActionBar().setTitle("Add Message");
-            handleButton();
+            handleAdd();
         }
     
-        public void handleButton(){
+        public void handleAdd(){
             Button addBtn = findViewById(R.id.add_btn);
             addBtn.setOnClickListener(view -> {
                 EditText nameTxt = findViewById(R.id.name_txt);
@@ -34,19 +34,19 @@ public class AddMessagesActivity extends AppCompatActivity {
                 String phone = phoneTxt.getText().toString();
                 EditText messageTxt = findViewById(R.id.messages_txt);
                 String message = messageTxt.getText().toString();
-                createData(name, phone, message);
+                createMessage(name, phone, message);
     
             });
         }
     
-        public void createData(String name, String phone, String message) {
-            Message message1 = new Message();
-            message1.name = name;
-            message1.phoneNumber = phone;
-            message1.messagesText = message;
+        public void createMessage(String name, String phone, String message) {
+            Message messages = new Message();
+            messages.name = name;
+            messages.phoneNumber = phone;
+            messages.messagesText = message;
             MessagesApi messageApi = new MessagesApi();
-            MessagesService messageService = messageApi.createMessageService();
-           Call<Message> call =  messageService.create(message1);
+            MessagesService messageService = messageApi.createMessagesService();
+           Call<Message> call =  messageService.createMessage(messages);
            call.enqueue(new Callback<Message>() {
                @Override
                public void onResponse(Call<Message> call, Response<Message> response) {
