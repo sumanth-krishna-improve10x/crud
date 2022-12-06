@@ -19,10 +19,10 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         onItemActionListener = listener;
     }
 
-    List<Message> messagesList;
+    List<Message> messageList;
 
-    public void setUpData (List<Message> messageArrayList){
-        messagesList = messageArrayList;
+    public void setUpData (List<Message> messages){
+        messageList = messages;
         notifyDataSetChanged();
 
     }
@@ -37,10 +37,10 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
-        Message message = messagesList.get(position);
+        Message message = messageList.get(position);
         holder.nameTxt.setText(message.name);
         holder.phoneNumberTxt.setText(message.phoneNumber);
-        holder.messageTxt.setText(message.messagesText);
+        holder.messageTextTxt.setText(message.messagesText);
         holder.deleteBtn.setOnClickListener(view -> {
             onItemActionListener.onItemDelete(message);
         });
@@ -51,6 +51,6 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
     @Override
     public int getItemCount() {
-        return messagesList.size();
+        return messageList.size();
     }
 }
