@@ -54,8 +54,8 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         fetchMessages();
     }
 

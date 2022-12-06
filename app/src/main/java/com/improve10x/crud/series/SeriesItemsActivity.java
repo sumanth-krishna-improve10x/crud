@@ -35,8 +35,8 @@ public class SeriesItemsActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         fetchSeriesItems();
     }
 
@@ -47,12 +47,13 @@ public class SeriesItemsActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(SeriesItemsActivity.this, "Sucessfully done", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SeriesItemsActivity.this, "Successfully done", Toast.LENGTH_SHORT).show();
                 fetchSeriesItems();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(SeriesItemsActivity.this, "Failed to get load", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -74,8 +75,8 @@ public class SeriesItemsActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<SeriesItem>>() {
             @Override
             public void onResponse(Call<List<SeriesItem>> call, Response<List<SeriesItem>> response) {
-                List<SeriesItem> series = response.body();
-                seriesItemsAdapter.setData(series);
+                List<SeriesItem> seriesItems = response.body();
+                seriesItemsAdapter.setData(seriesItems);
             }
 
             @Override

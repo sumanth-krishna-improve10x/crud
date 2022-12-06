@@ -26,19 +26,19 @@ public class AddSeriesItemActivity extends AppCompatActivity {
         public void handleAdd() {
             Button addBtn = findViewById(R.id.add_btn);
             addBtn.setOnClickListener(view -> {
-                EditText seriesId = findViewById(R.id.series_id);
-                String id = seriesId.getText().toString();
-                EditText seriesName = findViewById(R.id.series_name);
-                String name = seriesName.getText().toString();
-                EditText seriesImgUrl = findViewById(R.id.series_imgurl);
-                String imgUrl = seriesImgUrl.getText().toString();
+                EditText seriesIdTxt = findViewById(R.id.series_id_txt);
+                String id = seriesIdTxt.getText().toString();
+                EditText seriesNameTxt = findViewById(R.id.series_name_txt);
+                String name = seriesNameTxt.getText().toString();
+                EditText seriesImgUrlTxt = findViewById(R.id.series_imgurl_txt);
+                String imgUrl = seriesImgUrlTxt.getText().toString();
                 createSeriesItem(id, name, imgUrl);
             });
     }
 
     private void createSeriesItem(String id, String name, String imgUrl) {
         SeriesItem series = new SeriesItem();
-        series.id = id;
+        series.seriesId = id;
         series.title = name;
         series.imageUrl = imgUrl;
 

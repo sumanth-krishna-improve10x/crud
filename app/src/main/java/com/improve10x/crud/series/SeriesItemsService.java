@@ -16,7 +16,7 @@ public interface SeriesItemsService {
     @POST("sumanthSeries")
     Call<SeriesItem> createSeriesItem(@Body SeriesItem series);
 
-    @DELETE("sumanthSeries{/id}")
+    @DELETE("sumanthSeries/{id}")
     Call<Void> deleteSeriesItem(@Path("id")String id);
 
 }

@@ -22,11 +22,11 @@ public class SeriesItemsAdapter extends RecyclerView.Adapter<SeriesItemViewHolde
 
     public List<SeriesItem> seriesList;
 
-
     public void setData(List<SeriesItem>seriesItems){
         seriesList = seriesItems;
         notifyDataSetChanged();
     }
+
     @NonNull
     @Override
     public SeriesItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
