@@ -26,6 +26,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesViewHolder> {
 
     public void setData(List<Series>seriesArrayList){
         seriesList = seriesArrayList;
+        notifyDataSetChanged();
     }
     @NonNull
     @Override

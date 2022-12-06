@@ -13,15 +13,15 @@ import java.util.List;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
-    public com.improve10x.crud.messages.onItemActionListener onItemActionListener;
+    public OnItemActionListener onItemActionListener;
 
-    public void setOnItemActionListener(onItemActionListener listener){
+    public void setOnItemActionListener(OnItemActionListener listener){
         onItemActionListener = listener;
     }
 
     List<Message> messageList;
 
-    public void setUpData (List<Message> messages){
+    public void setData(List<Message> messages){
         messageList = messages;
         notifyDataSetChanged();
 

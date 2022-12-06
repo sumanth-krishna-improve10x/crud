@@ -75,7 +75,7 @@ public class MessagesActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 List<Message> messages = response.body();
-                messagesAdapter.setUpData(messages);
+                messagesAdapter.setData(messages);
             }
 
 
@@ -90,9 +90,9 @@ public class MessagesActivity extends AppCompatActivity {
         messagesRv = findViewById(R.id.message_rcv);
         messagesRv.setLayoutManager(new LinearLayoutManager(this));
         messagesAdapter = new MessagesAdapter();
-        messagesAdapter.setUpData(messageList);
+        messagesAdapter.setData(messageList);
         messagesRv.setAdapter(messagesAdapter);
-        messagesAdapter.setOnItemActionListener(new onItemActionListener() {
+        messagesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Message message) {
                 Toast.makeText(MessagesActivity.this, "onItemClicked", Toast.LENGTH_SHORT).show();
