@@ -30,13 +30,13 @@ public class TemplatesActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Template");
         handleAdd();
         setupData();
-        setupTemplateRv();
+        setupTemplatesRv();
     }
 
-    public void deleteMessage(Template template) {
+    public void deleteTemplate(Template template) {
         TemplatesApi templateApi = new TemplatesApi();
-        TemplatesService templateService = templateApi.createTemplateService();
-        Call<Void> call = templateService.deleteMessage(template.id);
+        TemplatesService templateService = templateApi.createTemplatesService();
+        Call<Void> call = templateService.deleteTemplate(template.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -67,8 +67,8 @@ public class TemplatesActivity extends AppCompatActivity {
 
     public void fetchTemplates(){
         TemplatesApi templateApi = new TemplatesApi();
-        TemplatesService templateService = templateApi.createTemplateService();
-        Call<List<Template>> call = templateService.fetchData();
+        TemplatesService templateService = templateApi.createTemplatesService();
+        Call<List<Template>> call = templateService.fetchTemplates();
         call.enqueue(new Callback<List<Template>>() {
             @Override
             public void onResponse(Call<List<Template>> call, Response<List<Template>> response) {
@@ -83,7 +83,7 @@ public class TemplatesActivity extends AppCompatActivity {
         });
     }
 
-    public void setupTemplateRv() {
+    public void setupTemplatesRv() {
         templatesRv = findViewById(R.id.template_rcv);
         templatesRv.setLayoutManager(new LinearLayoutManager(this));
         templatesAdapter = new TemplatesAdapter();
@@ -98,7 +98,7 @@ public class TemplatesActivity extends AppCompatActivity {
             @Override
             public void onItemDelete(Template template) {
                 Toast.makeText(TemplatesActivity.this, "on Delete", Toast.LENGTH_SHORT).show();
-                deleteMessage(template);
+                deleteTemplate(template);
             }
 
             @Override

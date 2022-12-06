@@ -11,13 +11,13 @@ import retrofit2.http.Path;
 
 public interface TemplatesService {
 
-    @GET("templates")
-    Call<List<Template>> fetchData();
+    @GET("sumanthTemplates")
+    Call<List<Template>> fetchTemplates();
 
-    @POST("templates")
-    Call<Template> create(@Body Template template);
+    @POST("sumanthTemplates")
+    Call<Template> createTemplate(@Body Template template);
 
-    @DELETE ("templates/{id}")
-    Call<Void> deleteMessage (@Path("id")String id);
+    @DELETE ("sumanthTemplates/{id}")
+    Call<Void> deleteTemplate(@Path("id")String id);
 
 }

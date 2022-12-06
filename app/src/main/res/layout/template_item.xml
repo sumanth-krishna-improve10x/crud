@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/template_mgs_txt"
@@ -10,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="#dee1e6"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/delete_btn"

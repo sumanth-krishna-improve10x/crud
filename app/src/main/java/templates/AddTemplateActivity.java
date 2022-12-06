@@ -20,11 +20,10 @@ public class AddTemplateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_template);
         getSupportActionBar().setTitle("Add Template");
-        handleBtn();
-
+        handleAdd();
     }
 
-    private void handleBtn() {
+    private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             EditText mgsEditTxt = findViewById(R.id.message_edit_txt);
@@ -38,8 +37,8 @@ public class AddTemplateActivity extends AppCompatActivity {
         template.messageText = message;
 
         TemplatesApi templateApi = new TemplatesApi();
-        TemplatesService templateService = templateApi.createTemplateService();
-        Call<Template> call = templateService.create(template);
+        TemplatesService templateService = templateApi.createTemplatesService();
+        Call<Template> call = templateService.createTemplate(template);
         call.enqueue(new Callback<Template>() {
             @Override
             public void onResponse(Call<Template> call, Response<Template> response) {
@@ -50,9 +49,7 @@ public class AddTemplateActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Template> call, Throwable t) {
                 Toast.makeText(AddTemplateActivity.this, "Failed to get loaded", Toast.LENGTH_SHORT).show();
-
             }
         });
-
     }
 }
