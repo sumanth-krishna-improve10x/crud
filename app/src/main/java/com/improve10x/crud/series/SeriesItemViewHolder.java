@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.crud.R;
 
-public class SeriesViewHolder extends RecyclerView.ViewHolder {
+public class SeriesItemViewHolder extends RecyclerView.ViewHolder {
 
     ImageView seriesImg;
     TextView titleTxt;
     ImageView deleteBtn;
 
-    public SeriesViewHolder(@NonNull View itemView) {
+    public SeriesItemViewHolder(@NonNull View itemView) {
         super(itemView);
         seriesImg = itemView.findViewById(R.id.series_img);
         titleTxt = itemView.findViewById(R.id.title_txt);

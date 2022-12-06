@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddSeriesActivity extends AppCompatActivity {
+public class AddSeriesItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,24 +37,24 @@ public class AddSeriesActivity extends AppCompatActivity {
     }
 
     private void createSeries(String id, String name, String imgUrl) {
-        Series series = new Series();
+        SeriesItem series = new SeriesItem();
         series.id = id;
         series.title = name;
         series.imageUrl = imgUrl;
 
-        SeriesApi api = new SeriesApi();
-        SeriesService seriesService = api.createSeriesService();
-        Call<Series> call = seriesService.create(series);
-        call.enqueue(new Callback<Series>() {
+        SeriesItemsApi api = new SeriesItemsApi();
+        SeriesItemsService seriesService = api.createSeriesService();
+        Call<SeriesItem> call = seriesService.create(series);
+        call.enqueue(new Callback<SeriesItem>() {
             @Override
-            public void onResponse(Call<Series> call, Response<Series> response) {
-                Toast.makeText(AddSeriesActivity.this, "Successfully loaded", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<SeriesItem> call, Response<SeriesItem> response) {
+                Toast.makeText(AddSeriesItemActivity.this, "Successfully loaded", Toast.LENGTH_SHORT).show();
                 finish();
             }
 
             @Override
-            public void onFailure(Call<Series> call, Throwable t) {
-                Toast.makeText(AddSeriesActivity.this, "Failed to get loaded", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<SeriesItem> call, Throwable t) {
+                Toast.makeText(AddSeriesItemActivity.this, "Failed to get loaded", Toast.LENGTH_SHORT).show();
             }
         });
 

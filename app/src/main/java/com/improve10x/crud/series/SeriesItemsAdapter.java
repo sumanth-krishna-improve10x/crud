@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.improve10x.crud.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SeriesAdapter extends RecyclerView.Adapter<SeriesViewHolder> {
+public class SeriesItemsAdapter extends RecyclerView.Adapter<SeriesItemViewHolder> {
 
     OnItemActionListener onItemActionListener;
 
@@ -21,24 +20,24 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesViewHolder> {
         onItemActionListener = listener;
     }
 
-    public List<Series> seriesList;
+    public List<SeriesItem> seriesList;
 
 
-    public void setData(List<Series>seriesArrayList){
+    public void setData(List<SeriesItem>seriesArrayList){
         seriesList = seriesArrayList;
         notifyDataSetChanged();
     }
     @NonNull
     @Override
-    public SeriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SeriesItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.series_item,parent,false);
-        SeriesViewHolder seriesViewHolder = new SeriesViewHolder(view);
+        SeriesItemViewHolder seriesViewHolder = new SeriesItemViewHolder(view);
         return seriesViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SeriesViewHolder holder, int position) {
-        Series series = seriesList.get(position);
+    public void onBindViewHolder(@NonNull SeriesItemViewHolder holder, int position) {
+        SeriesItem series = seriesList.get(position);
         holder.titleTxt.setText(series.title);
         Picasso.get().load(series.imageUrl).into(holder.seriesImg);
         holder.deleteBtn.setOnClickListener(view -> {

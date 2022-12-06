@@ -9,14 +9,14 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-public interface SeriesService {
-    @GET("series")
-    Call<List<Series>> fetchData();
+public interface SeriesItemsService {
+    @GET("sumanthSeries")
+    Call<List<SeriesItem>> fetchData();
 
-    @POST("series")
-    Call<Series> create(@Body Series series);
+    @POST("sumanthSeries")
+    Call<SeriesItem> create(@Body SeriesItem series);
 
-    @DELETE("series{/id}")
+    @DELETE("sumanthSeries{/id}")
     Call<Void> deleteMessage (@Path("id")String id);
 
 }
