@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 
 import com.improve10x.crud.messages.MessagesActivity;
+import com.improve10x.crud.movies.MoviesActivity;
 import com.improve10x.crud.series.SeriesItemsActivity;
 
 import templates.TemplatesActivity;
@@ -35,6 +36,12 @@ public class DashboardActivity extends AppCompatActivity {
         seriesImgBtn.setOnClickListener(view -> {
             Intent seriesIntent = new Intent(this, SeriesItemsActivity.class);
             startActivity(seriesIntent);
+        });
+
+        ImageButton movieImgBtn = findViewById(R.id.movie_imgbtn);
+        movieImgBtn.setOnClickListener(view -> {
+            Intent movieIntent = new Intent(this, MoviesActivity.class);
+            startActivity(movieIntent);
         });
     }
 }

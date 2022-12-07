@@ -1,18 +1,19 @@
-package com.improve10x.crud.series;
+package com.improve10x.crud.movies;
 
 import com.improve10x.crud.Constants;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SeriesItemsApi {
+public class MoviesApi {
 
-    public SeriesItemsService createSeriesItemService(){
+    public MoviesService createMoviesService(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        SeriesItemsService seriesItemsService = retrofit.create(SeriesItemsService.class);
-        return seriesItemsService;
+
+        MoviesService moviesService = retrofit.create(MoviesService.class);
+        return moviesService;
     }
 }

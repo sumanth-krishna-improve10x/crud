@@ -20,9 +20,9 @@ import retrofit2.Response;
 
 public class MessagesActivity extends AppCompatActivity {
 
-    public ArrayList<Message> messageList;
-    public RecyclerView messagesRv;
-    public MessagesAdapter messagesAdapter;
+    private ArrayList<Message> messageList;
+    private RecyclerView messagesRv;
+    private MessagesAdapter messagesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class MessagesActivity extends AppCompatActivity {
         fetchMessages();
     }
 
-    public void handleAdd() {
+    private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent addMessageIntent = new Intent(this, AddMessagesActivity.AddMessageActivity.class);
@@ -67,7 +67,7 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
-    public void fetchMessages(){
+    private void fetchMessages(){
         MessagesApi messageApi = new MessagesApi();
         MessagesService messageService = messageApi.createMessagesService();
         Call<List<Message>> call = messageService.fetchMessages();

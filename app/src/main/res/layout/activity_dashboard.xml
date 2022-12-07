@@ -61,6 +61,22 @@
                 android:text="Series"
                 android:textColor="#000000"
                 android:textSize="16sp" />
+
+            <ImageButton
+                android:id="@+id/movie_imgbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Movies"
+                android:textColor="#000000"
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
