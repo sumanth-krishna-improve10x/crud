@@ -86,7 +86,7 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
-    public void setupMessagesRv() {
+    private void setupMessagesRv() {
         messagesRv = findViewById(R.id.message_rcv);
         messagesRv.setLayoutManager(new LinearLayoutManager(this));
         messagesAdapter = new MessagesAdapter();
@@ -113,8 +113,7 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
-    public void setupData() {
-
+    private void setupData() {
         messageList = new ArrayList<>();
     }
 }

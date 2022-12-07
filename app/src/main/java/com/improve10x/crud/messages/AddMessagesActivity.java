@@ -25,7 +25,7 @@ public class AddMessagesActivity extends AppCompatActivity {
             handleAdd();
         }
     
-        public void handleAdd(){
+        private void handleAdd(){
             Button addBtn = findViewById(R.id.add_btn);
             addBtn.setOnClickListener(view -> {
                 EditText nameTxt = findViewById(R.id.name_txt);
@@ -39,7 +39,7 @@ public class AddMessagesActivity extends AppCompatActivity {
             });
         }
     
-        public void createMessage(String name, String phone, String message) {
+        private void createMessage(String name, String phone, String message) {
             Message messages = new Message();
             messages.name = name;
             messages.phoneNumber = phone;
