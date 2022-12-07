@@ -19,9 +19,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TemplatesActivity extends AppCompatActivity {
-    public ArrayList<Template> templates;
-    public RecyclerView templatesRv;
-    public TemplatesAdapter templatesAdapter;
+    private ArrayList<Template> templates;
+    private RecyclerView templatesRv;
+    private TemplatesAdapter templatesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class TemplatesActivity extends AppCompatActivity {
         setupTemplatesRv();
     }
 
-    public void deleteTemplate(Template template) {
+    private void deleteTemplate(Template template) {
         TemplatesApi templateApi = new TemplatesApi();
         TemplatesService templateService = templateApi.createTemplatesService();
         Call<Void> call = templateService.deleteTemplate(template.id);
@@ -65,7 +65,7 @@ public class TemplatesActivity extends AppCompatActivity {
         fetchTemplates();
     }
 
-    public void fetchTemplates(){
+    private void fetchTemplates(){
         TemplatesApi templateApi = new TemplatesApi();
         TemplatesService templateService = templateApi.createTemplatesService();
         Call<List<Template>> call = templateService.fetchTemplates();
@@ -83,7 +83,7 @@ public class TemplatesActivity extends AppCompatActivity {
         });
     }
 
-    public void setupTemplatesRv() {
+    private void setupTemplatesRv() {
         templatesRv = findViewById(R.id.template_rcv);
         templatesRv.setLayoutManager(new LinearLayoutManager(this));
         templatesAdapter = new TemplatesAdapter();
