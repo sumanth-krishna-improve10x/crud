@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.improve10x.crud.CurdApi;
+import com.improve10x.crud.CurdService;
 import com.improve10x.crud.R;
 
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+        Log.i("MessageActivity", "OnCreate called");
         getSupportActionBar().setTitle("Message");
         handleAdd();
         setupData();
@@ -35,9 +39,9 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     private void deleteMessage(Message message) {
-        MessagesApi api = new MessagesApi();
-        MessagesService messageService = api.createMessagesService();
-        Call<Void> call = messageService.deleteMessage(message.id);
+        CurdApi curdApi = new CurdApi();
+        CurdService curdService = curdApi.createCurdService();
+        Call<Void> call = curdService.deleteMessage(message.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -56,6 +60,7 @@ public class MessagesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i("MessageActivity", "OnResume called" );
         fetchMessages();
     }
 
@@ -68,16 +73,15 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     private void fetchMessages(){
-        MessagesApi messageApi = new MessagesApi();
-        MessagesService messageService = messageApi.createMessagesService();
-        Call<List<Message>> call = messageService.fetchMessages();
+        CurdApi curdApi = new CurdApi();
+        CurdService curdService = curdApi.createCurdService();
+        Call<List<Message>> call = curdService.fetchMessages();
         call.enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 List<Message> messages = response.body();
                 messagesAdapter.setData(messages);
             }
-
 
             @Override
             public void onFailure(Call<List<Message>> call, Throwable t) {

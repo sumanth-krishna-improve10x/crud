@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.improve10x.crud.CurdApi;
+import com.improve10x.crud.CurdService;
 import com.improve10x.crud.R;
 
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ public class TemplatesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template);
+        Log.i("TemplateActivity", "onCreate called");
         getSupportActionBar().setTitle("Template");
         handleAdd();
         setupData();
@@ -34,9 +38,9 @@ public class TemplatesActivity extends AppCompatActivity {
     }
 
     private void deleteTemplate(Template template) {
-        TemplatesApi templateApi = new TemplatesApi();
-        TemplatesService templateService = templateApi.createTemplatesService();
-        Call<Void> call = templateService.deleteTemplate(template.id);
+        CurdApi curdApi = new CurdApi();
+        CurdService curdService = curdApi.createCurdService();
+        Call<Void> call = curdService.deleteTemplate(template.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -62,13 +66,14 @@ public class TemplatesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i("TemplateActivity", "onResume called");
         fetchTemplates();
     }
 
     private void fetchTemplates(){
-        TemplatesApi templateApi = new TemplatesApi();
-        TemplatesService templateService = templateApi.createTemplatesService();
-        Call<List<Template>> call = templateService.fetchTemplates();
+        CurdApi curdApi = new CurdApi();
+        CurdService curdService = curdApi.createCurdService();
+        Call<List<Template>> call = curdService.fetchTemplates();
         call.enqueue(new Callback<List<Template>>() {
             @Override
             public void onResponse(Call<List<Template>> call, Response<List<Template>> response) {

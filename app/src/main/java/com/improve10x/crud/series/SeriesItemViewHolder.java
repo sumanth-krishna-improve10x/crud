@@ -11,9 +11,9 @@ import com.improve10x.crud.R;
 
 public class SeriesItemViewHolder extends RecyclerView.ViewHolder {
 
-    public ImageView seriesImg;
-    public TextView titleTxt;
-    public ImageView deleteBtn;
+     ImageView seriesImg;
+     TextView titleTxt;
+     ImageView deleteBtn;
 
     public SeriesItemViewHolder(@NonNull View itemView) {
         super(itemView);

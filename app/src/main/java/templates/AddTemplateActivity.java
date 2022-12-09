@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.improve10x.crud.CurdApi;
+import com.improve10x.crud.CurdService;
 import com.improve10x.crud.R;
 
 import retrofit2.Call;
@@ -36,9 +38,9 @@ public class AddTemplateActivity extends AppCompatActivity {
         Template template = new Template();
         template.messageText = message;
 
-        TemplatesApi templateApi = new TemplatesApi();
-        TemplatesService templateService = templateApi.createTemplatesService();
-        Call<Template> call = templateService.createTemplate(template);
+        CurdApi curdApi = new CurdApi();
+        CurdService curdService = curdApi.createCurdService();
+        Call<Template> call = curdService.createTemplate(template);
         call.enqueue(new Callback<Template>() {
             @Override
             public void onResponse(Call<Template> call, Response<Template> response) {

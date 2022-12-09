@@ -14,15 +14,15 @@ import java.util.List;
 
 public class SeriesItemsAdapter extends RecyclerView.Adapter<SeriesItemViewHolder> {
 
-    OnItemActionListener onItemActionListener;
+   private OnItemActionListener onItemActionListener;
 
-    public void setOnItemActionListener(OnItemActionListener listener){
+     void setOnItemActionListener(OnItemActionListener listener){
         onItemActionListener = listener;
     }
 
-    public List<SeriesItem> seriesList;
+    private List<SeriesItem> seriesList;
 
-    public void setData(List<SeriesItem>seriesItems){
+     void setData(List<SeriesItem>seriesItems){
         seriesList = seriesItems;
         notifyDataSetChanged();
     }

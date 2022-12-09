@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.improve10x.crud.CurdApi;
+import com.improve10x.crud.CurdService;
 import com.improve10x.crud.R;
 
 import java.util.ArrayList;
@@ -19,9 +21,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SeriesItemsActivity extends AppCompatActivity {
-    public ArrayList<SeriesItem> seriesList;
-    public RecyclerView seriesItemsRv;
-    public SeriesItemsAdapter seriesItemsAdapter;
+    private ArrayList<SeriesItem> seriesList;
+    private RecyclerView seriesItemsRv;
+    private SeriesItemsAdapter seriesItemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +42,10 @@ public class SeriesItemsActivity extends AppCompatActivity {
         fetchSeriesItems();
     }
 
-    public void deleteSeriesItem(SeriesItem series){
-        SeriesItemsApi seriesApi = new SeriesItemsApi();
-        SeriesItemsService seriesService = seriesApi.createSeriesItemService();
-        Call<Void> call = seriesService.deleteSeriesItem(series.id);
+    private void deleteSeriesItem(SeriesItem series){
+        CurdApi curdApi = new CurdApi();
+        CurdService curdService = curdApi.createCurdService();
+        Call<Void> call = curdService.deleteSeriesItem(series.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -60,7 +62,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
 
     }
 
-    public void handleAdd() {
+    private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent addSeriesIntent = new Intent(this, AddSeriesItemActivity.class);
@@ -68,10 +70,10 @@ public class SeriesItemsActivity extends AppCompatActivity {
         });
     }
 
-    public void fetchSeriesItems(){
-        SeriesItemsApi seriesItemsApi = new SeriesItemsApi();
-        SeriesItemsService seriesService = seriesItemsApi.createSeriesItemService();
-        Call<List<SeriesItem>> call = seriesService.fetchSeriesItems();
+    private void fetchSeriesItems(){
+        CurdApi curdApi = new CurdApi();
+        CurdService curdService = curdApi.createCurdService();
+        Call<List<SeriesItem>> call = curdService.fetchSeriesItems();
         call.enqueue(new Callback<List<SeriesItem>>() {
             @Override
             public void onResponse(Call<List<SeriesItem>> call, Response<List<SeriesItem>> response) {
@@ -113,7 +115,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
         });
     }
 
-    public void setupData(){
+    private void setupData(){
         seriesList = new ArrayList<>();
     }
 }

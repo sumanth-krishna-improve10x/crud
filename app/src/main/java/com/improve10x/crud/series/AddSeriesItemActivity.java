@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.improve10x.crud.CurdApi;
+import com.improve10x.crud.CurdService;
 import com.improve10x.crud.R;
 
 import retrofit2.Call;
@@ -42,9 +44,9 @@ public class AddSeriesItemActivity extends AppCompatActivity {
         series.title = name;
         series.imageUrl = imgUrl;
 
-        SeriesItemsApi api = new SeriesItemsApi();
-        SeriesItemsService seriesService = api.createSeriesItemService();
-        Call<SeriesItem> call = seriesService.createSeriesItem(series);
+        CurdApi curdApi = new CurdApi();
+        CurdService curdService = curdApi.createCurdService();
+        Call<SeriesItem> call = curdService.createSeriesItem(series);
         call.enqueue(new Callback<SeriesItem>() {
             @Override
             public void onResponse(Call<SeriesItem> call, Response<SeriesItem> response) {

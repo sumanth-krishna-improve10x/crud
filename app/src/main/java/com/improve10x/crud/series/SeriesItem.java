@@ -5,10 +5,10 @@ import com.squareup.picasso.Target;
 
 public class SeriesItem {
     @SerializedName("_id")
-    public String id;
-    public String seriesId;
+     String id;
+     String seriesId;
     @SerializedName("imageUrl")
-    public String imageUrl;
+     String imageUrl;
     @SerializedName("title")
-    public String title;
+     String title;
 }
