@@ -7,8 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.improve10x.crud.CurdApi;
-import com.improve10x.crud.CurdService;
+import com.improve10x.crud.api.CurdApi;
+import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
 
 import retrofit2.Call;
@@ -16,13 +16,25 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddTemplateActivity extends AppCompatActivity {
+    private CurdService curdService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_template);
         getSupportActionBar().setTitle("Add Template");
+        setupApiService();
         handleAdd();
+    }
+
+    private void setupApiService() {
+        CurdApi curdApi = new CurdApi();
+        curdService = curdApi.createCurdService();
+    }
+
+    private void showToast(String template){
+        Toast.makeText(AddTemplateActivity.this, "template", Toast.LENGTH_SHORT).show();
+
     }
 
     private void handleAdd() {
@@ -38,19 +50,17 @@ public class AddTemplateActivity extends AppCompatActivity {
         Template template = new Template();
         template.messageText = message;
 
-        CurdApi curdApi = new CurdApi();
-        CurdService curdService = curdApi.createCurdService();
         Call<Template> call = curdService.createTemplate(template);
         call.enqueue(new Callback<Template>() {
             @Override
             public void onResponse(Call<Template> call, Response<Template> response) {
-                Toast.makeText(AddTemplateActivity.this, "Successfully loaded", Toast.LENGTH_SHORT).show();
+                showToast("Successfully loaded");
                 finish();
             }
 
             @Override
             public void onFailure(Call<Template> call, Throwable t) {
-                Toast.makeText(AddTemplateActivity.this, "Failed to get loaded", Toast.LENGTH_SHORT).show();
+               showToast("Failed to get loaded");
             }
         });
     }

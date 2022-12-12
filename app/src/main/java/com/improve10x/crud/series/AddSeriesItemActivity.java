@@ -7,8 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.improve10x.crud.CurdApi;
-import com.improve10x.crud.CurdService;
+import com.improve10x.crud.api.CurdApi;
+import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
 
 import retrofit2.Call;
@@ -16,16 +16,28 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddSeriesItemActivity extends AppCompatActivity {
+    private CurdService curdService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_series);
         getSupportActionBar().setTitle("AddSeries");
+        setupApiService();
        handleAdd();
     }
 
-        public void handleAdd() {
+    private void setupApiService() {
+        CurdApi crudApi = new CurdApi();
+        curdService = crudApi.createCurdService();
+    }
+
+    private void showToast(String seriesItem){
+        Toast.makeText(AddSeriesItemActivity.this, "seriesItem", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void handleAdd() {
             Button addBtn = findViewById(R.id.add_btn);
             addBtn.setOnClickListener(view -> {
                 EditText seriesIdTxt = findViewById(R.id.series_id_txt);
@@ -44,19 +56,17 @@ public class AddSeriesItemActivity extends AppCompatActivity {
         series.title = name;
         series.imageUrl = imgUrl;
 
-        CurdApi curdApi = new CurdApi();
-        CurdService curdService = curdApi.createCurdService();
         Call<SeriesItem> call = curdService.createSeriesItem(series);
         call.enqueue(new Callback<SeriesItem>() {
             @Override
             public void onResponse(Call<SeriesItem> call, Response<SeriesItem> response) {
-                Toast.makeText(AddSeriesItemActivity.this, "Successfully loaded", Toast.LENGTH_SHORT).show();
+                showToast("Successfully loaded");
                 finish();
             }
 
             @Override
             public void onFailure(Call<SeriesItem> call, Throwable t) {
-                Toast.makeText(AddSeriesItemActivity.this, "Failed to get loaded", Toast.LENGTH_SHORT).show();
+                showToast("Failed to get loaded");
             }
         });
     }

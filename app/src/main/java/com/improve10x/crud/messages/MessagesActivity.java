@@ -10,9 +10,10 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.improve10x.crud.CurdApi;
-import com.improve10x.crud.CurdService;
+import com.improve10x.crud.api.CurdApi;
+import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
+import com.improve10x.crud.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MessagesActivity extends AppCompatActivity {
-
+public class MessagesActivity extends BaseActivity {
+    private CurdService curdService;
     private ArrayList<Message> messageList;
     private RecyclerView messagesRv;
     private MessagesAdapter messagesAdapter;
@@ -31,27 +32,31 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-        Log.i("MessageActivity", "OnCreate called");
+        log("onCreate");
         getSupportActionBar().setTitle("Message");
+        setupApiService();
         handleAdd();
         setupData();
         setupMessagesRv();
     }
 
-    private void deleteMessage(Message message) {
+    private void setupApiService() {
         CurdApi curdApi = new CurdApi();
-        CurdService curdService = curdApi.createCurdService();
+        curdService = curdApi.createCurdService();
+    }
+
+    private void deleteMessage(Message message) {
         Call<Void> call = curdService.deleteMessage(message.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(MessagesActivity.this, "Successfully deleted", Toast.LENGTH_SHORT).show();
+               showToast("Successfully loaded");
                 fetchMessages();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(MessagesActivity.this, "Failed to delete", Toast.LENGTH_SHORT).show();
+                showToast("Failed to get loaded");
 
             }
         });
@@ -60,7 +65,7 @@ public class MessagesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("MessageActivity", "OnResume called" );
+        log("onResume");
         fetchMessages();
     }
 
@@ -73,8 +78,6 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     private void fetchMessages(){
-        CurdApi curdApi = new CurdApi();
-        CurdService curdService = curdApi.createCurdService();
         Call<List<Message>> call = curdService.fetchMessages();
         call.enqueue(new Callback<List<Message>>() {
             @Override
@@ -85,7 +88,7 @@ public class MessagesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Message>> call, Throwable t) {
-                Toast.makeText(MessagesActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                showToast("Failed to get loaded");
             }
         });
     }
@@ -99,20 +102,18 @@ public class MessagesActivity extends AppCompatActivity {
         messagesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Message message) {
-                Toast.makeText(MessagesActivity.this, "onItemClicked", Toast.LENGTH_SHORT).show();
+                showToast("onItemClick");
             }
 
             @Override
             public void onItemDelete(Message message) {
-                Toast.makeText(MessagesActivity.this, "onItemDeleted", Toast.LENGTH_SHORT).show();
+                showToast("onItemDelete");
                 deleteMessage(message);
-
             }
 
             @Override
             public void onItemEdit(Message message) {
-                Toast.makeText(MessagesActivity.this, "onItemClicked", Toast.LENGTH_SHORT).show();
-
+                showToast("onItemEdit");
             }
         });
     }

@@ -10,9 +10,10 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.improve10x.crud.CurdApi;
-import com.improve10x.crud.CurdService;
+import com.improve10x.crud.api.CurdApi;
+import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
+import com.improve10x.crud.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TemplatesActivity extends AppCompatActivity {
+public class TemplatesActivity extends BaseActivity {
+    private CurdService curdService;
     private ArrayList<Template> templates;
     private RecyclerView templatesRv;
     private TemplatesAdapter templatesAdapter;
@@ -30,27 +32,31 @@ public class TemplatesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template);
-        Log.i("TemplateActivity", "onCreate called");
+        log("onCreate");
         getSupportActionBar().setTitle("Template");
+        setupApiService();
         handleAdd();
         setupData();
         setupTemplatesRv();
     }
 
-    private void deleteTemplate(Template template) {
+    private void setupApiService() {
         CurdApi curdApi = new CurdApi();
-        CurdService curdService = curdApi.createCurdService();
+        curdService = curdApi.createCurdService();
+    }
+
+    private void deleteTemplate(Template template) {
         Call<Void> call = curdService.deleteTemplate(template.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(TemplatesActivity.this, "Successfully done", Toast.LENGTH_SHORT).show();
+                showToast("Successfully loaded");
                 fetchTemplates();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(TemplatesActivity.this, "Failed to delete", Toast.LENGTH_SHORT).show();
+                showToast("Failed to get loaded");
             }
         });
     }
@@ -66,13 +72,11 @@ public class TemplatesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("TemplateActivity", "onResume called");
+        log("onResume");
         fetchTemplates();
     }
 
     private void fetchTemplates(){
-        CurdApi curdApi = new CurdApi();
-        CurdService curdService = curdApi.createCurdService();
         Call<List<Template>> call = curdService.fetchTemplates();
         call.enqueue(new Callback<List<Template>>() {
             @Override
@@ -83,7 +87,7 @@ public class TemplatesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Template>> call, Throwable t) {
-                Toast.makeText(TemplatesActivity.this, "Failed to get loaded", Toast.LENGTH_SHORT).show();
+                showToast("Failed to get loaded");
             }
         });
     }
@@ -97,18 +101,18 @@ public class TemplatesActivity extends AppCompatActivity {
         templatesAdapter.setOnItemClickListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Template template) {
-                Toast.makeText(TemplatesActivity.this, "on Clicked", Toast.LENGTH_SHORT).show();
+               showToast("onItemClicked");
             }
 
             @Override
             public void onItemDelete(Template template) {
-                Toast.makeText(TemplatesActivity.this, "on Delete", Toast.LENGTH_SHORT).show();
+               showToast("onItemDelete");
                 deleteTemplate(template);
             }
 
             @Override
             public void onItemEdit(Template template) {
-                Toast.makeText(TemplatesActivity.this, "on Edit", Toast.LENGTH_SHORT).show();
+               showToast("onItemEdit");
             }
         });
     }

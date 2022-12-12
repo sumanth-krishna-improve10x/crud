@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.improve10x.crud.CurdApi;
-import com.improve10x.crud.CurdService;
+import com.improve10x.crud.api.CurdApi;
+import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
+import com.improve10x.crud.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SeriesItemsActivity extends AppCompatActivity {
+public class SeriesItemsActivity extends BaseActivity {
+    private CurdService curdService;
     private ArrayList<SeriesItem> seriesList;
     private RecyclerView seriesItemsRv;
     private SeriesItemsAdapter seriesItemsAdapter;
@@ -30,33 +33,37 @@ public class SeriesItemsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series);
         getSupportActionBar().setTitle("Series");
+        log("onCreate");
+        setupApiService();
         handleAdd();
         setupData();
         setupSeriesItemsRv();
     }
 
+    private void setupApiService() {
+        CurdApi curdApi = new CurdApi();
+        curdService = curdApi.createCurdService();
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
+        log("onResume");
         fetchSeriesItems();
     }
 
     private void deleteSeriesItem(SeriesItem series){
-        CurdApi curdApi = new CurdApi();
-        CurdService curdService = curdApi.createCurdService();
         Call<Void> call = curdService.deleteSeriesItem(series.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(SeriesItemsActivity.this, "Successfully done", Toast.LENGTH_SHORT).show();
+                showToast("Successfully loaded");
                 fetchSeriesItems();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(SeriesItemsActivity.this, "Failed to get load", Toast.LENGTH_SHORT).show();
-
+                showToast("Failed to gert loaded");
             }
         });
 
@@ -71,8 +78,6 @@ public class SeriesItemsActivity extends AppCompatActivity {
     }
 
     private void fetchSeriesItems(){
-        CurdApi curdApi = new CurdApi();
-        CurdService curdService = curdApi.createCurdService();
         Call<List<SeriesItem>> call = curdService.fetchSeriesItems();
         call.enqueue(new Callback<List<SeriesItem>>() {
             @Override
@@ -83,6 +88,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<SeriesItem>> call, Throwable t) {
+                showToast("Failed to get load");
 
             }
         });
@@ -97,20 +103,18 @@ public class SeriesItemsActivity extends AppCompatActivity {
         seriesItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(SeriesItem series) {
-                Toast.makeText(SeriesItemsActivity.this, "onItemClicked", Toast.LENGTH_SHORT).show();
+                showToast("onItemClicked");
             }
 
             @Override
             public void onItemDelete(SeriesItem series) {
-                Toast.makeText(SeriesItemsActivity.this, "onItemDelete", Toast.LENGTH_SHORT).show();
+               showToast("onItemDelete");
                 deleteSeriesItem(series);
-
             }
 
             @Override
             public void onItemEdit(SeriesItem series) {
-                Toast.makeText(SeriesItemsActivity.this, "onItemEdit", Toast.LENGTH_SHORT).show();
-
+               showToast("onItemEdit");
             }
         });
     }

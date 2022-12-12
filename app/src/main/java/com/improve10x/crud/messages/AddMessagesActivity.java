@@ -7,8 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.improve10x.crud.CurdApi;
-import com.improve10x.crud.CurdService;
+import com.improve10x.crud.api.CurdApi;
+import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
 
 import retrofit2.Call;
@@ -17,8 +17,10 @@ import retrofit2.Response;
 
 public class AddMessagesActivity extends AppCompatActivity {
 
+
     public static class AddMessageActivity extends AppCompatActivity {
-    
+
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);

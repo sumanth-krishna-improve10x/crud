@@ -1,5 +1,6 @@
-package com.improve10x.crud;
+package com.improve10x.crud.api;
 
+import com.improve10x.crud.Constants;
 import com.improve10x.crud.messages.Message;
 import com.improve10x.crud.movies.Movie;
 import com.improve10x.crud.series.SeriesItem;
