@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.improve10x.crud.api.CurdApi;
 import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
+import com.improve10x.crud.base.BaseActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,52 +19,68 @@ import retrofit2.Response;
 public class AddMessagesActivity extends AppCompatActivity {
 
 
-    public static class AddMessageActivity extends AppCompatActivity {
-
+    public static class AddMessageActivity extends BaseActivity {
+        public CurdService curdService;
+        private Button addBtn;
+        private EditText nameTxt;
+        private EditText phoneTxt;
+        private EditText messageText;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_add_message);
             getSupportActionBar().setTitle("Add Message");
+            setupViews();
+            setupApiService();
             handleAdd();
         }
-    
+
+        private void setupApiService() {
+            CurdApi curdApi = new CurdApi();
+            curdService = curdApi.createCurdService();
+        }
+
+
+        private void setupViews() {
+            addBtn = findViewById(R.id.add_btn);
+            nameTxt = findViewById(R.id.name_txt);
+            phoneTxt = findViewById(R.id.phone_txt);
+            messageText = findViewById(R.id.messages_text);
+        }
+
         private void handleAdd(){
-            Button addBtn = findViewById(R.id.add_btn);
             addBtn.setOnClickListener(view -> {
-                EditText nameTxt = findViewById(R.id.name_txt);
                 String name = nameTxt.getText().toString();
-                EditText phoneTxt = findViewById(R.id.phone_txt);
                 String phone = phoneTxt.getText().toString();
-                EditText messageTxt = findViewById(R.id.messages_txt);
-                String message = messageTxt.getText().toString();
-                createMessage(name, phone, message);
-    
+                String messageTxt = messageText.getText().toString();
+                Message message = createMessage(name, phone, messageTxt);
+                saveMessage(message);
             });
         }
-    
-        private void createMessage(String name, String phone, String message) {
+
+        private void saveMessage(Message message) {
+            Call<Message> call = curdService.createMessage(message);
+            call.enqueue(new Callback<Message>() {
+                @Override
+                public void onResponse(Call<Message> call, Response<Message> response) {
+                    Toast.makeText(AddMessageActivity.this, "Successfully loaded", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
+                @Override
+                public void onFailure(Call<Message> call, Throwable t) {
+                    Toast.makeText(AddMessageActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        }
+
+        private static Message createMessage(String name, String phone, String message) {
             Message messages = new Message();
             messages.name = name;
             messages.phoneNumber = phone;
             messages.messagesText = message;
-            CurdApi curdApi = new CurdApi();
-            CurdService curdService = curdApi.createCurdService();
-           Call<Message> call =  curdService.createMessage(messages);
-           call.enqueue(new Callback<Message>() {
-               @Override
-               public void onResponse(Call<Message> call, Response<Message> response) {
-                   Toast.makeText(AddMessageActivity.this, "Successfully loaded", Toast.LENGTH_SHORT).show();
-                   finish();
-               }
-    
-               @Override
-               public void onFailure(Call<Message> call, Throwable t) {
-                   Toast.makeText(AddMessageActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-               }
-           });
-    
-        }
+            return messages;
     }
 }

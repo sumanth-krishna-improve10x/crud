@@ -10,12 +10,13 @@ import android.widget.Toast;
 import com.improve10x.crud.api.CurdApi;
 import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
+import com.improve10x.crud.base.BaseActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddSeriesItemActivity extends AppCompatActivity {
+public class AddSeriesItemActivity extends BaseActivity {
     private CurdService curdService;
 
     @Override
@@ -30,11 +31,6 @@ public class AddSeriesItemActivity extends AppCompatActivity {
     private void setupApiService() {
         CurdApi crudApi = new CurdApi();
         curdService = crudApi.createCurdService();
-    }
-
-    private void showToast(String seriesItem){
-        Toast.makeText(AddSeriesItemActivity.this, "seriesItem", Toast.LENGTH_SHORT).show();
-
     }
 
     public void handleAdd() {

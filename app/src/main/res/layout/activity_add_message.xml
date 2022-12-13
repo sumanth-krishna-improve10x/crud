@@ -57,7 +57,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/messages_txt"
+            android:id="@+id/messages_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"

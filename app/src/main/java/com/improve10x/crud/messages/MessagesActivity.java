@@ -38,64 +38,10 @@ public class MessagesActivity extends BaseActivity {
         handleAdd();
         setupData();
         setupMessagesRv();
+        setupAdapter();
     }
 
-    private void setupApiService() {
-        CurdApi curdApi = new CurdApi();
-        curdService = curdApi.createCurdService();
-    }
-
-    private void deleteMessage(Message message) {
-        Call<Void> call = curdService.deleteMessage(message.id);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-               showToast("Successfully loaded");
-                fetchMessages();
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                showToast("Failed to get loaded");
-
-            }
-        });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        log("onResume");
-        fetchMessages();
-    }
-
-    private void handleAdd() {
-        Button addBtn = findViewById(R.id.add_btn);
-        addBtn.setOnClickListener(view -> {
-            Intent addMessageIntent = new Intent(this, AddMessagesActivity.AddMessageActivity.class);
-            startActivity(addMessageIntent);
-        });
-    }
-
-    private void fetchMessages(){
-        Call<List<Message>> call = curdService.fetchMessages();
-        call.enqueue(new Callback<List<Message>>() {
-            @Override
-            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
-                List<Message> messages = response.body();
-                messagesAdapter.setData(messages);
-            }
-
-            @Override
-            public void onFailure(Call<List<Message>> call, Throwable t) {
-                showToast("Failed to get loaded");
-            }
-        });
-    }
-
-    private void setupMessagesRv() {
-        messagesRv = findViewById(R.id.message_rcv);
-        messagesRv.setLayoutManager(new LinearLayoutManager(this));
+    private void setupAdapter() {
         messagesAdapter = new MessagesAdapter();
         messagesAdapter.setData(messageList);
         messagesRv.setAdapter(messagesAdapter);
@@ -116,6 +62,64 @@ public class MessagesActivity extends BaseActivity {
                 showToast("onItemEdit");
             }
         });
+    }
+
+    private void setupApiService() {
+        CurdApi curdApi = new CurdApi();
+        curdService = curdApi.createCurdService();
+    }
+
+    private void deleteMessage(Message message) {
+        Call<Void> call = curdService.deleteMessage(message.id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                showToast("Successfully loaded");
+                fetchMessages();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                showToast("Failed to get loaded");
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        log("onResume");
+        fetchMessages();
+    }
+
+    private void handleAdd() {
+        Button addBtn = findViewById(R.id.add_btn);
+        addBtn.setOnClickListener(view -> {
+            Intent addMessageIntent = new Intent(this, AddMessagesActivity.AddMessageActivity.class);
+            startActivity(addMessageIntent);
+        });
+    }
+
+    private void fetchMessages() {
+        Call<List<Message>> call = curdService.fetchMessages();
+        call.enqueue(new Callback<List<Message>>() {
+            @Override
+            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                List<Message> messages = response.body();
+                messagesAdapter.setData(messages);
+            }
+
+            @Override
+            public void onFailure(Call<List<Message>> call, Throwable t) {
+                showToast("Failed to get loaded");
+            }
+        });
+    }
+
+    private void setupMessagesRv() {
+        messagesRv = findViewById(R.id.message_rcv);
+        messagesRv.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     private void setupData() {
