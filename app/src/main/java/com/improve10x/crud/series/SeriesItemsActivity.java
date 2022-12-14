@@ -38,6 +38,30 @@ public class SeriesItemsActivity extends BaseActivity {
         handleAdd();
         setupData();
         setupSeriesItemsRv();
+        setupAdapter();
+    }
+
+    private void setupAdapter() {
+        seriesItemsAdapter = new SeriesItemsAdapter();
+        seriesItemsRv.setAdapter(seriesItemsAdapter);
+        seriesItemsAdapter.setData(seriesList);
+        seriesItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(SeriesItem series) {
+                showToast("onItemClicked");
+            }
+
+            @Override
+            public void onItemDelete(SeriesItem series) {
+                showToast("onItemDelete");
+                deleteSeriesItem(series);
+            }
+
+            @Override
+            public void onItemEdit(SeriesItem series) {
+                showToast("onItemEdit");
+            }
+        });
     }
 
     private void setupApiService() {
@@ -60,13 +84,11 @@ public class SeriesItemsActivity extends BaseActivity {
                 showToast("Successfully loaded");
                 fetchSeriesItems();
             }
-
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 showToast("Failed to gert loaded");
             }
         });
-
     }
 
     private void handleAdd() {
@@ -97,26 +119,7 @@ public class SeriesItemsActivity extends BaseActivity {
     public void setupSeriesItemsRv(){
         seriesItemsRv = findViewById(R.id.series_rcv);
         seriesItemsRv.setLayoutManager(new LinearLayoutManager(this));
-        seriesItemsAdapter = new SeriesItemsAdapter();
-        seriesItemsRv.setAdapter(seriesItemsAdapter);
-        seriesItemsAdapter.setData(seriesList);
-        seriesItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
-            @Override
-            public void onItemClicked(SeriesItem series) {
-                showToast("onItemClicked");
-            }
 
-            @Override
-            public void onItemDelete(SeriesItem series) {
-               showToast("onItemDelete");
-                deleteSeriesItem(series);
-            }
-
-            @Override
-            public void onItemEdit(SeriesItem series) {
-               showToast("onItemEdit");
-            }
-        });
     }
 
     private void setupData(){

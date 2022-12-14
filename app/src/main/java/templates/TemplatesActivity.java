@@ -40,6 +40,33 @@ public class TemplatesActivity extends BaseActivity {
         handleAdd();
         setupData();
         setupTemplatesRv();
+        setupAdapter();
+    }
+
+    private void setupAdapter() {
+        templatesAdapter = new TemplatesAdapter();
+        templatesAdapter.setTemplates(templates);
+        templatesRv.setAdapter(templatesAdapter);
+        templatesAdapter.setOnItemClickListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Template template) {
+                Intent intent = new Intent(TemplatesActivity.this, AddTemplateActivity.class);
+                intent.putExtra(Constants.KEY_TEMPLATE, template);
+                startActivity(intent);
+                //showToast("onItemClicked");
+            }
+
+            @Override
+            public void onItemDelete(Template template) {
+                showToast("onItemDelete");
+                deleteTemplate(template);
+            }
+
+            @Override
+            public void onItemEdit(Template template) {
+                showToast("onItemEdit");
+            }
+        });
     }
 
     private void setupApiService() {
@@ -66,7 +93,7 @@ public class TemplatesActivity extends BaseActivity {
     private void handleAdd() {
         addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
-            Intent addTemplateIntent = new Intent(this,AddTemplateActivity.class);
+            Intent addTemplateIntent = new Intent(this, AddTemplateActivity.class);
             startActivity(addTemplateIntent);
         });
     }
@@ -78,7 +105,7 @@ public class TemplatesActivity extends BaseActivity {
         fetchTemplates();
     }
 
-    private void fetchTemplates(){
+    private void fetchTemplates() {
         Call<List<Template>> call = curdService.fetchTemplates();
         call.enqueue(new Callback<List<Template>>() {
             @Override
@@ -97,32 +124,9 @@ public class TemplatesActivity extends BaseActivity {
     private void setupTemplatesRv() {
         templatesRv = findViewById(R.id.template_rcv);
         templatesRv.setLayoutManager(new LinearLayoutManager(this));
-        templatesAdapter = new TemplatesAdapter();
-        templatesAdapter.setTemplates(templates);
-        templatesRv.setAdapter(templatesAdapter);
-        templatesAdapter.setOnItemClickListener(new OnItemActionListener() {
-            @Override
-            public void onItemClicked(Template template) {
-                Intent intent = new Intent(TemplatesActivity.this,AddTemplateActivity.class);
-                intent.putExtra(Constants.KEY_TEMPLATE, template);
-                startActivity(intent);
-               //showToast("onItemClicked");
-            }
-
-            @Override
-            public void onItemDelete(Template template) {
-               showToast("onItemDelete");
-                deleteTemplate(template);
-            }
-
-            @Override
-            public void onItemEdit(Template template) {
-               showToast("onItemEdit");
-            }
-        });
     }
+
     private void setupData() {
-        templates  = new ArrayList<>();
+        templates = new ArrayList<>();
     }
-
 }
