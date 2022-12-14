@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.improve10x.crud.Constants;
 import com.improve10x.crud.api.CurdApi;
 import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
@@ -48,7 +49,9 @@ public class SeriesItemsActivity extends BaseActivity {
         seriesItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(SeriesItem series) {
-                showToast("onItemClicked");
+                Intent intent = new Intent(SeriesItemsActivity.this,AddSeriesItemActivity.class);
+                intent.putExtra(Constants.KEY_SERIES,series);
+                startActivity(intent);
             }
 
             @Override
