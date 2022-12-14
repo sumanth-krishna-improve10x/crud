@@ -12,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import templates.Template;
 
@@ -25,6 +26,9 @@ public interface CurdService {
     @DELETE(Constants.MESSAGE_END_POINT + "/{id}")
     Call<Void> deleteMessage(@Path("id") String id);
 
+    @PUT (Constants.MESSAGE_END_POINT + "/{id}")
+    Call<Void> updateMessage(@Path("id") String id, @Body Message message);
+
     @GET(Constants.TEMPLATES_END_POINT)
     Call<List<Template>> fetchTemplates();
 
@@ -33,6 +37,9 @@ public interface CurdService {
 
     @DELETE (Constants.TEMPLATES_END_POINT + "/{id}")
     Call<Void> deleteTemplate(@Path("id")String id);
+
+    @PUT (Constants.TEMPLATES_END_POINT + "/{id}")
+    Call<Void> updatedTemplate(@Path("id") String id, @Body Template template);
 
     @GET(Constants.SERIES_END_POINT)
     Call<List<SeriesItem>> fetchSeriesItems();

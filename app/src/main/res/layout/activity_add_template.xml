@@ -38,4 +38,10 @@
         android:text="Add"
         android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/edit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit" />
+
 </LinearLayout>

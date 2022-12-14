@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.improve10x.crud.Constants;
 import com.improve10x.crud.api.CurdApi;
 import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
@@ -27,6 +28,7 @@ public class TemplatesActivity extends BaseActivity {
     private ArrayList<Template> templates;
     private RecyclerView templatesRv;
     private TemplatesAdapter templatesAdapter;
+    private Button addBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class TemplatesActivity extends BaseActivity {
     }
 
     private void handleAdd() {
-        Button addBtn = findViewById(R.id.add_btn);
+        addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent addTemplateIntent = new Intent(this,AddTemplateActivity.class);
             startActivity(addTemplateIntent);
@@ -101,7 +103,10 @@ public class TemplatesActivity extends BaseActivity {
         templatesAdapter.setOnItemClickListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Template template) {
-               showToast("onItemClicked");
+                Intent intent = new Intent(TemplatesActivity.this,AddTemplateActivity.class);
+                intent.putExtra(Constants.KEY_TEMPLATE, template);
+                startActivity(intent);
+               //showToast("onItemClicked");
             }
 
             @Override

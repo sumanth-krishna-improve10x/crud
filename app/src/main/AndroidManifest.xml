@@ -43,7 +43,7 @@
             android:name="templates.TemplatesActivity"
             android:exported="false" />
         <activity
-            android:name=".messages.AddMessagesActivity$AddMessageActivity"
+            android:name=".messages.AddMessageActivity"
             android:exported="false" />
         <activity
             android:name=".messages.MessagesActivity"
@@ -51,15 +51,6 @@
         <activity
             android:name=".DashboardActivity"
             android:exported="false" />
-        <activity
-            android:name=".messages.AddMessagesActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" />

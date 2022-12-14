@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.improve10x.crud.Constants;
 import com.improve10x.crud.api.CurdApi;
 import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
@@ -48,7 +49,10 @@ public class MessagesActivity extends BaseActivity {
         messagesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Message message) {
-                showToast("onItemClick");
+                Intent intent = new Intent(MessagesActivity.this,AddMessageActivity.class);
+                intent.putExtra(Constants.KEY_MESSAGE,message);
+                startActivity(intent);
+                //showToast("onItemClick");
             }
 
             @Override
@@ -95,7 +99,7 @@ public class MessagesActivity extends BaseActivity {
     private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
-            Intent addMessageIntent = new Intent(this, AddMessagesActivity.AddMessageActivity.class);
+            Intent addMessageIntent = new Intent(this, AddMessageActivity.class);
             startActivity(addMessageIntent);
         });
     }

@@ -8,61 +8,62 @@
     android:padding="6dp"
     tools:context=".messages.AddMessagesActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="Name"
+        android:textColor="#130909"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/name_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="PhoneNumber"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/phone_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="Message"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/messages_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="Name"
-            android:textColor="#130909"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/name_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="PhoneNumber"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/phone_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="Message"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/messages_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
     </LinearLayout>
 
     <Button
@@ -71,5 +72,11 @@
         android:layout_height="wrap_content"
         android:text="Add"
         android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/edit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit" />
 
 </LinearLayout>

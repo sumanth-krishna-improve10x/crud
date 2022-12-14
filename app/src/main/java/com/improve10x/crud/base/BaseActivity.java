@@ -14,7 +14,6 @@ public class BaseActivity extends AppCompatActivity {
     }
 
    protected void log(String message){
-       Log.i(this.getClass().getSimpleName(),message);
+        Log.i(this.getClass().getSimpleName(),message);
     }
-
 }

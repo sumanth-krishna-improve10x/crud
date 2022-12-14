@@ -7,6 +7,7 @@ public class Constants {
     public static final String KEY_SERIES = "series";
     public static final String KEY_MOVIES = "movies";
 
+
     public static final String MESSAGE_END_POINT = "sumanthMessageHistory";
     public static final String TEMPLATES_END_POINT = "sumanthTemplates";
     public static final String SERIES_END_POINT = "sumanthSeries";
