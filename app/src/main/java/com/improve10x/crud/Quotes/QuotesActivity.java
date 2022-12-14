@@ -9,13 +9,15 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.base.BaseActivity;
 
 import java.util.ArrayList;
 
-public class QuotesActivity extends AppCompatActivity {
+public class QuotesActivity extends BaseActivity {
    private ArrayList<Quotes> quotes;
    private RecyclerView quotesRv;
    private Button addBtn;
+   private QuotesAdapter quotesAdapter;
 
 
     @Override
@@ -24,7 +26,14 @@ public class QuotesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quotes);
         getSupportActionBar().setTitle("Quotes");
         setupViews();
+        setupAdapter();
         setData();
+    }
+
+    private void setupAdapter() {
+        quotesAdapter = new QuotesAdapter();
+        quotesRv.setAdapter(quotesAdapter);
+        quotesAdapter.setData(quotes);
     }
 
 
