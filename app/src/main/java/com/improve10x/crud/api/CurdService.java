@@ -1,6 +1,7 @@
 package com.improve10x.crud.api;
 
 import com.improve10x.crud.Constants;
+import com.improve10x.crud.Quotes.Quote;
 import com.improve10x.crud.messages.Message;
 import com.improve10x.crud.movies.Movie;
 import com.improve10x.crud.series.SeriesItem;
@@ -58,4 +59,16 @@ public interface CurdService {
 
     @POST(Constants.MOVIES_END_POINT)
     Call<Movie> createMovies(@Body Movie movie);
+
+    @GET(Constants.QUOTES_END_POINT)
+    Call<List<Quote>> fetchQuotes();
+
+    @POST(Constants.QUOTES_END_POINT)
+    Call<Quote> createQuotes(@Body Quote quotes);
+
+    @DELETE (Constants.QUOTES_END_POINT + "/{id}")
+    Call<Void> deleteQuotes(@Path("id")String id);
+
+    @PUT (Constants.QUOTES_END_POINT + "/{id}")
+    Call<Void> updateQuote(@Path("id")String id, @Body Quote updateQuote);
 }

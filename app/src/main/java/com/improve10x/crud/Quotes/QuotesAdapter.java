@@ -8,13 +8,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.crud.R;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.List;
 
 public class QuotesAdapter extends RecyclerView.Adapter<QuoteViewHolder> {
-    private List<Quotes> quotes;
+    private OnItemActionListener onItemActionListener;
+    private List<Quote> quotes;
 
-    void setData (List<Quotes>quotesList){
+    void setOnItemActionListener(OnItemActionListener listener){
+        onItemActionListener = listener;
+    }
+
+    void setData (List<Quote>quotesList){
         quotes = quotesList;
         notifyDataSetChanged();
 
@@ -29,9 +36,17 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuoteViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull QuoteViewHolder holder, int position) {
-
+        Quote quote = quotes.get(position);
+        holder.quoteTextTxt.setText(quote.quotes);
+        holder.authorNameTxt.setText(quote.authorName);
+        Picasso.get().load(quote.imageUrl).into(holder.quoteImgImg);
+        holder.deleteBtn.setOnClickListener(view -> {
+            onItemActionListener.onItemDelete(quote);
+        });
+        holder.itemView.setOnClickListener(view -> {
+            onItemActionListener.onItemClicked(quote);
+        });
     }
-
     @Override
     public int getItemCount() {
         return quotes.size();

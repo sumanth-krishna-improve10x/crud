@@ -13,7 +13,7 @@ public class BaseActivity extends AppCompatActivity {
         Toast.makeText(this, "message", Toast.LENGTH_SHORT).show();
     }
 
-   protected void log(String message){
+   protected void log(String message) {
         Log.i(this.getClass().getSimpleName(),message);
     }
 }
