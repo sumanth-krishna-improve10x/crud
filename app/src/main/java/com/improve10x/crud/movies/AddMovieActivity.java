@@ -74,7 +74,5 @@ public class AddMovieActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 }

@@ -50,7 +50,7 @@ public class QuotesActivity extends BaseActivity {
 
     private void handleAdd() {
         addBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(this,AddQuotesActivity.class);
+            Intent intent = new Intent(this, AddQuoteActivity.class);
             startActivity(intent);
         });
     }
@@ -84,7 +84,7 @@ public class QuotesActivity extends BaseActivity {
         quotesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Quote quote) {
-                Intent intent = new Intent(QuotesActivity.this,AddQuotesActivity.class);
+                Intent intent = new Intent(QuotesActivity.this, EditQuoteActivity.class);
                 intent.putExtra(Constants.KEY_QUOTES,quote);
                 startActivity(intent);
               // showToast("onItemClicked");
@@ -121,11 +121,6 @@ public class QuotesActivity extends BaseActivity {
             }
         });
     }
-
-    private void deleteQuote(Quote quote){
-
-    }
-
 
     private void setupViews() {
         quotesRv = findViewById(R.id.quotes_rv);

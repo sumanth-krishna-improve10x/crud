@@ -1,14 +1,11 @@
 package com.improve10x.crud.series;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.improve10x.crud.Constants;
 import com.improve10x.crud.api.CurdApi;
@@ -49,7 +46,7 @@ public class SeriesItemsActivity extends BaseActivity {
         seriesItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(SeriesItem series) {
-                Intent intent = new Intent(SeriesItemsActivity.this,AddSeriesItemActivity.class);
+                Intent intent = new Intent(SeriesItemsActivity.this, EditSeriesActivity.class);
                 intent.putExtra(Constants.KEY_SERIES,series);
                 startActivity(intent);
             }
@@ -97,7 +94,7 @@ public class SeriesItemsActivity extends BaseActivity {
     private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
-            Intent addSeriesIntent = new Intent(this, AddSeriesItemActivity.class);
+            Intent addSeriesIntent = new Intent(this, AddSeriesActivity.class);
             startActivity(addSeriesIntent);
         });
     }

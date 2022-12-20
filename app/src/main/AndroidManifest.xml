@@ -15,8 +15,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Crud"
         tools:targetApi="31">
+
         <activity
-            android:name=".Quotes.AddQuotesActivity"
+            android:name="templates.AddTemplateActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="templates.EditTemplateActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".series.AddSeriesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".series.SeriesItemsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".series.EditSeriesActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -24,6 +55,34 @@
         </activity>
         <activity
             android:name=".Quotes.QuotesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".messages.AddMessagesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".messages.EditMessageActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Quotes.AddQuoteActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Quotes.EditQuoteActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -43,21 +102,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".series.AddSeriesItemActivity"
-            android:exported="false" />
-        <activity
-            android:name=".series.SeriesItemsActivity"
-            android:exported="false" />
-        <activity
-            android:name="templates.AddTemplateActivity"
-            android:exported="false" />
+    </activity>
+
+
         <activity
             android:name="templates.TemplatesActivity"
             android:exported="false" />
         <activity
-            android:name=".messages.AddMessageActivity"
+            android:name=".messages.BaseAddEditMessageActivity"
             android:exported="false" />
         <activity
             android:name=".messages.MessagesActivity"
