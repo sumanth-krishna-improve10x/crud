@@ -18,23 +18,19 @@ public class AddMessagesActivity  extends BaseAddEditMessageActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Add Message");
-        setupViews();
         handleBtn();
         handleAdd();
     }
 
-    private void setupViews(){
-        addBtn = findViewById(R.id.add_btn);
-    }
     private void handleBtn(){
         addBtn.setVisibility(View.VISIBLE);
     }
 
     private void handleAdd(){
-        addBtn.setOnClickListener(view -> {
-            String name = nameTxt.getText().toString();
-            String phone = phoneTxt.getText().toString();
-            String messageTxt = messageText.getText().toString();
+        binding.addBtn.setOnClickListener(view -> {
+            String name = binding.nameTxt.getText().toString();
+            String phone = binding.phoneTxt.getText().toString();
+            String messageTxt = binding.messagesText.getText().toString();
             Message message = createMessage(name, phone, messageTxt);
             saveMessage(message);
         });

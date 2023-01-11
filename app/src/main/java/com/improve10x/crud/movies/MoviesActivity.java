@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.api.CurdApi;
+import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MoviesActivity extends BaseActivity {
+    public CurdService curdService;
     public ArrayList<Movie> movies;
     public RecyclerView moviesRv;
     public MoviesAdapter moviesAdapter;
@@ -28,10 +31,22 @@ public class MoviesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies_list);
         getSupportActionBar().setTitle("Movie");
+        setupViews();
         handleAdd();
         setMovies();
-        setupMoviesList();
+        setupAdapter();
+        setupApiService();
+    }
 
+    private void setupApiService() {
+        CurdApi api = new CurdApi();
+        curdService = api.createCurdService();
+    }
+
+    private void setupAdapter() {
+        moviesAdapter = new MoviesAdapter();
+        moviesAdapter.setData(movies);
+        moviesRv.setAdapter(moviesAdapter);
 
     }
 
@@ -50,9 +65,7 @@ public class MoviesActivity extends BaseActivity {
     }
 
     public void fetchMovies(){
-        MoviesApi movieApi = new MoviesApi();
-        MoviesService moviesService = movieApi.createMoviesService();
-        Call<List<Movie>> call = moviesService.fetchMovies();
+        Call<List<Movie>> call = curdService.fetchMovies();
         call.enqueue(new Callback<List<Movie>>() {
             @Override
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
@@ -67,12 +80,12 @@ public class MoviesActivity extends BaseActivity {
 
     }
 
-    public void setupMoviesList() {
+    public void setupViews() {
         moviesRv = findViewById(R.id.movies_rv);
         moviesRv.setLayoutManager(new GridLayoutManager(this,2));
-        moviesAdapter = new MoviesAdapter();
-        moviesAdapter.setData(movies);
         moviesRv.setAdapter(moviesAdapter);
+
+
     }
 
     public void setMovies(){

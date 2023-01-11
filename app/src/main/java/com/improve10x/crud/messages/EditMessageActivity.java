@@ -19,7 +19,6 @@ public class EditMessageActivity extends BaseAddEditMessageActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupViews();
         Intent intent = getIntent();
         if (intent.hasExtra(Constants.KEY_MESSAGE)) {
             getSupportActionBar().setTitle("Edit Message");
@@ -30,25 +29,21 @@ public class EditMessageActivity extends BaseAddEditMessageActivity {
         }
     }
 
-    private void setupViews(){
-        editBtn = findViewById(R.id.edit_btn);
-    }
-
     private void showData() {
-        nameTxt.setText(message.name);
-        phoneTxt.setText(message.phoneNumber);
-        messageText.setText(message.messagesText);
+        binding.nameTxt.setText(message.name);
+        binding.phoneTxt.setText(message.phoneNumber);
+        binding.messagesText.setText(message.messagesText);
     }
 
     private void handleEditBtn() {
-        editBtn.setVisibility(View.VISIBLE);
+        binding.editBtn.setVisibility(View.VISIBLE);
     }
 
     private void handleEdit() {
-        editBtn.setOnClickListener(view -> {
-            String name = nameTxt.getText().toString();
-            String phoneNumber = phoneTxt.getText().toString();
-            String messageTxt = messageText.getText().toString();
+        binding.editBtn.setOnClickListener(view -> {
+            String name = binding.nameTxt.getText().toString();
+            String phoneNumber = binding.phoneTxt.getText().toString();
+            String messageTxt = binding.messagesText.getText().toString();
             Message updatedMessage = createMessage(name, phoneNumber, messageTxt);
             updateMessage(message.id, updatedMessage);
         });

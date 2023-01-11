@@ -12,6 +12,7 @@ import com.improve10x.crud.api.CurdApi;
 import com.improve10x.crud.api.CurdService;
 import com.improve10x.crud.R;
 import com.improve10x.crud.base.BaseActivity;
+import com.improve10x.crud.databinding.ActivityMessageBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +24,14 @@ import retrofit2.Response;
 public class MessagesActivity extends BaseActivity {
     private CurdService curdService;
     private ArrayList<Message> messageList;
-    private RecyclerView messagesRv;
+    private ActivityMessageBinding binding;
     private MessagesAdapter messagesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message);
+        binding = ActivityMessageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         log("onCreate");
         getSupportActionBar().setTitle("Message");
         setupApiService();
@@ -42,7 +44,7 @@ public class MessagesActivity extends BaseActivity {
     private void setupAdapter() {
         messagesAdapter = new MessagesAdapter();
         messagesAdapter.setData(messageList);
-        messagesRv.setAdapter(messagesAdapter);
+        binding.messageRcv.setAdapter(messagesAdapter);
         messagesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Message message) {
@@ -94,8 +96,7 @@ public class MessagesActivity extends BaseActivity {
     }
 
     private void handleAdd() {
-        Button addBtn = findViewById(R.id.add_btn);
-        addBtn.setOnClickListener(view -> {
+        binding.addBtn.setOnClickListener(view -> {
             Intent addMessageIntent = new Intent(this, AddMessagesActivity.class);
             startActivity(addMessageIntent);
         });
@@ -118,8 +119,7 @@ public class MessagesActivity extends BaseActivity {
     }
 
     private void setupMessagesRv() {
-        messagesRv = findViewById(R.id.message_rcv);
-        messagesRv.setLayoutManager(new LinearLayoutManager(this));
+       binding.messageRcv.setLayoutManager(new LinearLayoutManager(this));
 
     }
 

@@ -39,7 +39,9 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuoteViewHolder> {
         Quote quote = quotes.get(position);
         holder.quoteTextTxt.setText(quote.quotes);
         holder.authorNameTxt.setText(quote.authorName);
-        Picasso.get().load(quote.imageUrl).into(holder.quoteImgImg);
+        if(quote.imageUrl != null && quote.imageUrl.isEmpty() == false) {
+            Picasso.get().load(quote.imageUrl).into(holder.quoteImgImg);
+        }
         holder.deleteBtn.setOnClickListener(view -> {
             onItemActionListener.onItemDelete(quote);
         });
